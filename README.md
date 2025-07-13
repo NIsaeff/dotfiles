@@ -213,3 +213,57 @@ If you have any questions or suggestions, feel free to open an issue or reach ou
 ---
 
 ⭐ If you found this helpful, consider giving it a star!
+
+#!/bin/bash
+
+set -euo pipefail
+
+### CONFIG ###
+DISK="/dev/nvme0n1"             # Change if needed
+CRYPT_NAME="cryptroot"
+VG_NAME="vg0"
+LV_ROOT_SIZE="40G"
+HOSTNAME="archlinux"
+ROOT_PASSWORD="changeme"        # Optional automation
+
+### 0. Unmount if already mounted
+umount -R /mnt || true
+swapoff -a || true
+
+### 1. Partition Disk (EFI + LUKS)
+parted -s "$DISK" mklabel gpt
+parted -s "$DISK" mkpart ESP fat32 1MiB 513MiB
+parted -s "$DISK" set 1 esp on
+parted -s "$DISK" mkpart primary 513MiB 100%
+
+EFI_PART="${DISK}p1"
+LUKS_PART="${DISK}p2"
+
+### 2. Encrypt with LUKS
+cryptsetup luksFormat "$LUKS_PART"
+cryptsetup open "$LUKS_PART" "$CRYPT_NAME"
+
+### 3. LVM Setup
+pvcreate /dev/mapper/$CRYPT_NAME
+vgcreate $VG_NAME /dev/mapper/$CRYPT_NAME
+lvcreate -L $LV_ROOT_SIZE $VG_NAME -n root
+lvcreate -l 100%FREE $VG_NAME -n home
+
+### 4. Format Partitions
+mkfs.fat -F32 "$EFI_PART"
+mkfs.btrfs /dev/$VG_NAME/root
+mkfs.btrfs /dev/$VG_NAME/home
+
+### 5. Create Btrfs Subvolumes
+mount /dev/$VG_NAME/root /mnt
+btrfs subvolume create /mnt/@
+umount /mnt
+
+# Mount subvolumes
+mount -o subvol=@,compress=zstd /dev/$VG_NAME/root /mnt
+mkdir /mnt/home /mnt/boot
+mount /dev/$VG_NAME/home /mnt/home
+mount "$EFI_PART" /mnt/boot
+
+echo "✅ Disk layout prepared."
+echo "You can now run: pacstrap /mnt base linux linux-firmware btrfs-progs lvm2"
