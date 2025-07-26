@@ -1,13 +1,25 @@
-# neofetch | lolcat -a -s 900
-# nitrogen --set-zoom-fill ~/Media/Backgrounds/978454.jpg
-# Color Setup
-autoload -U colors && colors
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-unsetopt beep
+# Set safe default PATH early to ensure coreutils and shell commands work
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin:$PATH"
+
+# Add user-specific paths
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/lib/ccache/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Create cache directory for zcompdump if not present
+mkdir -p ~/.zsh/cache
+
+# Enable compinit and use cache
+autoload -Uz compinit
+compinit -d ~/.zsh/cache/zcompdump-$ZSH_VERSION
+
+# Prompt
+eval "$(starship init zsh)"
+
+# Smart directory jumping
+eval "$(zoxide init zsh)"
+
 
 # aliases
 alias l='lsd -hl --group-dirs first'
@@ -21,11 +33,8 @@ alias fetch='neofetch | lolcat -a -s 900'
 
 # Basic auto/tab complete:
 zstyle :compinstall filename '/home/n8dawg/.zshrc'
-autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
- _comp_options+=(globdots)
 
 # vi mode
 bindkey -v
@@ -58,23 +67,9 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+export GOBIN=$HOME/.local/gobin
 
-export PATH=$PATH:/home/nate/.local/bin
-export PATH="/usr/lib/ccache/bin/:$PATH"
-export PATH="/home/n8dawg/.cargo/bin:$PATH"
-export PATH="$HOME/.local/bin":$PATH
-export PATH=$PATH:/usr/local/bin
-export GOBIN=/path/to/your/gobin
-export PATH=$GOBIN:$PATH
-
-
-# export XDG_CURRENT_DESKTOP=Sway 
-
-### SETTING THE SPACESHIP PROMPT ###
-source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-# eval $(kitty +kitten shell-integration)
-
-
+# Optional: Enable syntax highlighting or autosuggestions here if used
+# Example:
+ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
