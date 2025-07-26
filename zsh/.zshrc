@@ -1,4 +1,3 @@
-
 # Set safe default PATH early to ensure coreutils and shell commands work
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin:$PATH"
 
@@ -22,8 +21,8 @@ eval "$(zoxide init zsh)"
 
 
 # aliases
-alias l='lsd -hl --group-dirs first'
-alias ll='lsd -hA --group-dirs first'
+alias l='exa -hl --group-directories-first'
+alias ll='exa -lha --group-directories-first'
 alias c='clear'
 alias updatemirrors='sudo reflector --verbose --country DE,SE,GB --protocol https --sort rate --latest 20 --download-timeout 6 --save /etc/pacman.d/mirrorlist'
 alias pycharm='pycharm-professional'
