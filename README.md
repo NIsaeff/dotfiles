@@ -1,4 +1,4 @@
-Arch Linux GNOME + Niri Dotfiles
+# Arch Linux GNOME + Niri Dotfiles
 
 This repository contains my personal dotfiles for a clean and efficient Arch Linux setup using:
 
@@ -26,19 +26,19 @@ Prerequisites
 Install the following packages before using these dotfiles:
 Core Packages
 
-# Shell and utilities
+## Shell and utilities
 sudo pacman -S zsh stow git
 
-# Terminals
+## Terminals
 sudo pacman -S kitty alacritty
 
-# Prompt and enhancements
+## Prompt and enhancements
 sudo pacman -S starship zoxide fzf
 
-# Fonts
+## Fonts
 sudo pacman -S ttf-fira-code ttf-font-awesome noto-fonts noto-fonts-emoji
 
-Optional: Niri (Wayland Tiling Compositor)
+### Optional: Niri (Wayland Tiling Compositor)
 
 sudo pacman -S niri
 
@@ -59,10 +59,10 @@ cp ~/.zshrc ~/.config/backup/ 2>/dev/null || true
 
     Install Configurations with Stow
 
-# Example: install all configs
+## Example: install all configs
 ./install.sh
 
-# Or selectively stow one package at a time
+## Or selectively stow one package at a time
 stow -t ~/.config kitty
 stow -t ~/.config/alacritty alacritty
 stow -t ~/.config starship
