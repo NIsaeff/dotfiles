@@ -1,0 +1,482 @@
+.
+├── alacritty
+│   └── alacritty.toml -> .config/alacritty/alacritty.toml
+├── .bashrc
+├── .config
+│   ├── alacritty
+│   │   └── alacritty.toml
+│   ├── bashrc
+│   │   ├── 00-init
+│   │   ├── 10-aliases
+│   │   ├── 20-customization
+│   │   └── 30-autostart
+│   ├── dunst
+│   │   └── dunstrc
+│   ├── fastfetch
+│   │   └── config.jsonc
+│   ├── gtk-3.0
+│   │   ├── colors.css
+│   │   ├── gtk.css
+│   │   └── settings.ini
+│   ├── gtk-4.0
+│   │   ├── colors.css
+│   │   ├── gtk.css
+│   │   └── settings.ini
+│   ├── hypr
+│   │   ├── colors.conf
+│   │   ├── conf
+│   │   │   ├── animation.conf
+│   │   │   ├── animations
+│   │   │   │   ├── animations-classic.conf
+│   │   │   │   ├── animations-dynamic.conf
+│   │   │   │   ├── animations-end4.conf
+│   │   │   │   ├── animations-fast.conf
+│   │   │   │   ├── animations-high.conf
+│   │   │   │   ├── animations-moving.conf
+│   │   │   │   ├── default.conf
+│   │   │   │   ├── disabled.conf
+│   │   │   │   └── standard.conf
+│   │   │   ├── autostart.conf
+│   │   │   ├── cursor.conf
+│   │   │   ├── custom.conf
+│   │   │   ├── decoration.conf
+│   │   │   ├── decorations
+│   │   │   │   ├── default.conf
+│   │   │   │   ├── no-rounding.conf
+│   │   │   │   ├── no-rounding-more-blur.conf
+│   │   │   │   ├── rounding-all-blur.conf
+│   │   │   │   ├── rounding-all-blur-no-shadows.conf
+│   │   │   │   ├── rounding.conf
+│   │   │   │   └── rounding-more-blur.conf
+│   │   │   ├── environment.conf
+│   │   │   ├── environments
+│   │   │   │   ├── default.conf
+│   │   │   │   ├── kvm.conf
+│   │   │   │   └── nvidia.conf
+│   │   │   ├── keybinding.conf
+│   │   │   ├── keybindings
+│   │   │   │   ├── custom.conf
+│   │   │   │   ├── default.conf
+│   │   │   │   └── fr.conf
+│   │   │   ├── keyboard.conf
+│   │   │   ├── layout.conf
+│   │   │   ├── layouts
+│   │   │   │   ├── default.conf
+│   │   │   │   └── laptop.conf
+│   │   │   ├── misc.conf
+│   │   │   ├── ml4w.conf
+│   │   │   ├── monitor.conf
+│   │   │   ├── monitors
+│   │   │   │   ├── 1366x768.conf
+│   │   │   │   ├── 1440x1080.conf
+│   │   │   │   ├── 1600x900.conf
+│   │   │   │   ├── 1920x1080.conf
+│   │   │   │   ├── 1920x1200.conf
+│   │   │   │   ├── 2560x1440@120.conf
+│   │   │   │   ├── 2560x1440@120x125.conf
+│   │   │   │   ├── 2560x1440.conf
+│   │   │   │   ├── 3440x1440.conf
+│   │   │   │   ├── default.conf
+│   │   │   │   ├── hdmi-mirror.conf
+│   │   │   │   ├── highres.conf
+│   │   │   │   └── nwg-displays.conf
+│   │   │   ├── restorevariations.sh
+│   │   │   ├── window.conf
+│   │   │   ├── windowrule.conf
+│   │   │   ├── windowrules
+│   │   │   │   ├── default.conf
+│   │   │   │   └── windowrules.conf
+│   │   │   ├── windows
+│   │   │   │   ├── border-1.conf
+│   │   │   │   ├── border-1-reverse.conf
+│   │   │   │   ├── border-2.conf
+│   │   │   │   ├── border-2-reverse.conf
+│   │   │   │   ├── border-3.conf
+│   │   │   │   ├── border-3-reverse.conf
+│   │   │   │   ├── border-4.conf
+│   │   │   │   ├── border-4-reverse.conf
+│   │   │   │   ├── default.conf
+│   │   │   │   ├── no-border.conf
+│   │   │   │   └── no-border-more-gaps.conf
+│   │   │   ├── workspace.conf
+│   │   │   └── workspaces
+│   │   │       ├── custom.conf
+│   │   │       └── default.conf
+│   │   ├── effects
+│   │   │   └── wallpaper
+│   │   │       ├── blackwhite
+│   │   │       ├── blackwhite-blur
+│   │   │       ├── blackwhite-brightness40
+│   │   │       ├── blackwhite-brightness60
+│   │   │       ├── blackwhite-brightness80
+│   │   │       ├── blur1
+│   │   │       ├── blur1-brightness40
+│   │   │       ├── blur1-brightness60
+│   │   │       ├── blur1-brightness80
+│   │   │       ├── blur2
+│   │   │       ├── negate
+│   │   │       ├── negate-brightness40
+│   │   │       ├── negate-brightness60
+│   │   │       └── negate-brightness80
+│   │   ├── hypridle.conf
+│   │   ├── hyprland.conf
+│   │   ├── hyprlock.conf
+│   │   ├── hyprpaper.conf
+│   │   ├── scripts
+│   │   │   ├── cleanup.sh
+│   │   │   ├── disabledm.sh
+│   │   │   ├── gamemode.sh
+│   │   │   ├── gtk.sh
+│   │   │   ├── hdmi-switch.sh
+│   │   │   ├── hypridle.sh
+│   │   │   ├── hyprshade.sh
+│   │   │   ├── init-wallpaper-engine.sh
+│   │   │   ├── keepass-autofill.sh
+│   │   │   ├── keepass-backup.sh
+│   │   │   ├── keepass-generate.sh
+│   │   │   ├── keepass-lookup.sh
+│   │   │   ├── keepass-quick.sh
+│   │   │   ├── keepass-totp.sh
+│   │   │   ├── keybindings.sh
+│   │   │   ├── loadconfig.sh
+│   │   │   ├── moveTo.sh
+│   │   │   ├── power.sh
+│   │   │   ├── restart-hypridle.sh
+│   │   │   ├── screenshot.sh
+│   │   │   ├── systeminfo.sh
+│   │   │   ├── toggleallfloat.sh
+│   │   │   ├── toggle-animations.sh
+│   │   │   ├── wallpaper-automation.sh
+│   │   │   ├── wallpaper-cache.sh
+│   │   │   ├── wallpaper-effects.sh
+│   │   │   ├── wallpaper-restore.sh
+│   │   │   ├── wallpaper.sh
+│   │   │   └── xdg.sh
+│   │   └── shaders
+│   │       ├── blue-light-filter-25.glsl
+│   │       ├── blue-light-filter-50.glsl
+│   │       ├── blue-light-filter-75.glsl
+│   │       └── invert-colors.glsl
+│   ├── matugen
+│   │   ├── config.toml
+│   │   └── templates
+│   │       ├── colors.css
+│   │       ├── gtk-colors.css
+│   │       ├── hyprland-colors.conf
+│   │       ├── kitty-colors.conf
+│   │       ├── ohmyposh-colors.json
+│   │       ├── ohmyposh.json
+│   │       ├── pywalfox-colors.json
+│   │       ├── rofi-colors.rasi
+│   │       └── sequences
+│   ├── ml4w
+│   │   ├── assets
+│   │   │   └── blank.png
+│   │   ├── cache
+│   │   │   ├── blurred_wallpaper.png
+│   │   │   ├── current_wallpaper
+│   │   │   ├── current_wallpaper.rasi
+│   │   │   ├── square_wallpaper.png
+│   │   │   └── wallpaper-generated
+│   │   │       ├── blur-50x30-off-bullet-space.jpg.png
+│   │   │       ├── blur-50x30-off-default.jpg.png
+│   │   │       ├── blur-50x30-off-hyprland.jpg.png
+│   │   │       ├── blur-50x30-off-mountain.jpg.png
+│   │   │       ├── blur-50x30-off-mountain-lake.jpg.png
+│   │   │       ├── blur-50x30-off-Nocturne-of-Steel-and-Glass2.jpg.png
+│   │   │       ├── blur-50x30-off-orange-desert.jpg.png
+│   │   │       ├── blur-50x30-off-sundown-over-sea.jpg.png
+│   │   │       ├── blur-50x30-off-wallhaven3.jpg.png
+│   │   │       ├── square-bullet-space.jpg.png
+│   │   │       ├── square-default.jpg.png
+│   │   │       ├── square-hyprland.jpg.png
+│   │   │       ├── square-mountain.jpg.png
+│   │   │       ├── square-mountain-lake.jpg.png
+│   │   │       ├── square-Nocturne-of-Steel-and-Glass2.jpg.png
+│   │   │       ├── square-orange-desert.jpg.png
+│   │   │       ├── square-sundown-over-sea.jpg.png
+│   │   │       └── square-wallhaven3.jpg.png
+│   │   ├── login
+│   │   │   └── issue
+│   │   ├── scripts
+│   │   │   ├── arch
+│   │   │   │   ├── cleanup.sh
+│   │   │   │   ├── installprinters.sh
+│   │   │   │   ├── installtimeshift.sh
+│   │   │   │   ├── lid-improvements.sh
+│   │   │   │   ├── pacman.sh
+│   │   │   │   ├── snapshot.sh
+│   │   │   │   └── unlock-pacman.sh
+│   │   │   ├── cliphist.sh
+│   │   │   ├── figlet.sh
+│   │   │   ├── installupdates.sh
+│   │   │   ├── ml4w-autostart.sh
+│   │   │   ├── nm-applet.sh
+│   │   │   ├── sddm-wallpaper.sh
+│   │   │   ├── shell.sh
+│   │   │   ├── thunarterminal.sh
+│   │   │   ├── updates.sh
+│   │   │   └── wlogout.sh
+│   │   ├── settings
+│   │   │   ├── ai.sh
+│   │   │   ├── aur.sh
+│   │   │   ├── blur.sh
+│   │   │   ├── browser.sh
+│   │   │   ├── calculator.sh
+│   │   │   ├── calendar.sh
+│   │   │   ├── dotfiles-folder.sh
+│   │   │   ├── dunst_position.sh
+│   │   │   ├── editor.sh
+│   │   │   ├── email.sh
+│   │   │   ├── emojipicker.sh
+│   │   │   ├── eww-monitor.sh
+│   │   │   ├── filemanager.sh
+│   │   │   ├── hyprpaper.tpl
+│   │   │   ├── hyprpicker.sh
+│   │   │   ├── hyprshade.sh
+│   │   │   ├── installupdates.sh
+│   │   │   ├── kitty-cursor-trail.conf
+│   │   │   ├── ml4w-sidebar.sh
+│   │   │   ├── networkmanager.sh
+│   │   │   ├── platform.sh
+│   │   │   ├── printer-drivers.sh
+│   │   │   ├── rofi-border-radius.rasi
+│   │   │   ├── rofi-border.rasi
+│   │   │   ├── rofi_bordersize.sh
+│   │   │   ├── rofi-font.rasi
+│   │   │   ├── screenshot-editor.sh
+│   │   │   ├── screenshot-filename.sh
+│   │   │   ├── screenshot-folder.sh
+│   │   │   ├── sddm
+│   │   │   │   └── theme.tpl
+│   │   │   ├── software.sh
+│   │   │   ├── system-monitor.sh
+│   │   │   ├── terminal.sh
+│   │   │   ├── wallpaper-automation.sh
+│   │   │   ├── wallpaper-effect.sh
+│   │   │   ├── wallpaper-engine.sh
+│   │   │   ├── wallpaper-folder.sh
+│   │   │   ├── waybar_appmenu.sh
+│   │   │   ├── waybar_backlight.sh
+│   │   │   ├── waybar_chatgpt.sh
+│   │   │   ├── waybar_custom_timedateformat.sh
+│   │   │   ├── waybar_dateformat.sh
+│   │   │   ├── waybar_network.sh
+│   │   │   ├── waybar-quicklinks.json
+│   │   │   ├── waybar_quicklinks.sh
+│   │   │   ├── waybar_screenlock.sh
+│   │   │   ├── waybar_settings.sh
+│   │   │   ├── waybar_systray.sh
+│   │   │   ├── waybar_taskbar.sh
+│   │   │   ├── waybar-theme.sh
+│   │   │   ├── waybar_timeformat.sh
+│   │   │   ├── waybar_timezone.sh
+│   │   │   ├── waybar_toggle.sh
+│   │   │   ├── waybar_window.sh
+│   │   │   ├── waybar_workspaces.sh
+│   │   │   └── wlogout-parameters.sh
+│   │   ├── tpl
+│   │   │   └── .zshrc
+│   │   └── version
+│   │       ├── compare.sh
+│   │       ├── library.sh
+│   │       ├── name
+│   │       └── update.sh
+│   ├── niri
+│   │   ├── config.kdl
+│   │   └── config.toml
+│   ├── nvim
+│   │   └── init.vim
+│   ├── nwg-dock-hyprland
+│   │   ├── colors.css
+│   │   ├── launch.sh
+│   │   ├── style.css
+│   │   ├── style-dark.css
+│   │   └── style-light.css
+│   ├── ohmyposh
+│   │   ├── colors.json
+│   │   ├── EDM115-newline.omp.json
+│   │   └── zen.toml
+│   ├── qt6ct
+│   │   └── qt6ct.conf
+│   ├── rofi
+│   │   ├── backup
+│   │   ├── colors.rasi
+│   │   ├── config-cliphist.rasi
+│   │   ├── config-compact.rasi
+│   │   ├── config-hyprshade.rasi
+│   │   ├── config-old.rasi
+│   │   ├── config.rasi
+│   │   ├── config-screenshot.rasi
+│   │   ├── config-short.rasi
+│   │   └── config-themes.rasi
+│   ├── swaync
+│   │   ├── colors.css
+│   │   ├── config.json
+│   │   └── style.css
+│   ├── vim
+│   │   └── .vimrc
+│   ├── wal
+│   │   └── templates
+│   │       ├── colors-hyprland.conf
+│   │       ├── colors-rofi-pywal.rasi
+│   │       ├── colors-waybar.css
+│   │       └── colors-wlogout.css
+│   ├── wallust
+│   │   ├── templates
+│   │   │   └── kitty-colors.conf
+│   │   └── wallust.toml
+│   ├── waybar
+│   │   ├── colors.css
+│   │   ├── launch.sh
+│   │   ├── modules.json
+│   │   ├── themes
+│   │   │   ├── assets
+│   │   │   │   ├── ai-icon-20.png
+│   │   │   │   ├── ai-icon.png
+│   │   │   │   ├── hyprland-icon-20.png
+│   │   │   │   ├── hyprland-icon.png
+│   │   │   │   ├── ml4w-icon-20.png
+│   │   │   │   ├── ml4w-icon-black.svg
+│   │   │   │   ├── ml4w-icon-dark.png
+│   │   │   │   ├── ml4w-icon.png
+│   │   │   │   ├── ml4w-icon.svg
+│   │   │   │   ├── ml4w-icon-white.svg
+│   │   │   │   ├── openai-black.svg
+│   │   │   │   ├── openai.svg
+│   │   │   │   └── openai-white.svg
+│   │   │   ├── default
+│   │   │   │   ├── config
+│   │   │   │   ├── config.sh
+│   │   │   │   └── style.css
+│   │   │   ├── ml4w
+│   │   │   │   ├── black
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── config
+│   │   │   │   ├── dark
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── light
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── style.css
+│   │   │   │   └── white
+│   │   │   │       ├── config.sh
+│   │   │   │       └── style.css
+│   │   │   ├── ml4w-blur
+│   │   │   │   ├── black
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── config
+│   │   │   │   ├── dark
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── light
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── style.css
+│   │   │   │   └── white
+│   │   │   │       ├── config.sh
+│   │   │   │       └── style.css
+│   │   │   ├── ml4w-minimal
+│   │   │   │   ├── config
+│   │   │   │   ├── config.sh
+│   │   │   │   └── style.css
+│   │   │   ├── ml4w-modern
+│   │   │   │   ├── black
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── colored
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── config
+│   │   │   │   ├── dark
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── light
+│   │   │   │   │   ├── config.sh
+│   │   │   │   │   └── style.css
+│   │   │   │   ├── style.css
+│   │   │   │   └── white
+│   │   │   │       ├── config.sh
+│   │   │   │       └── style.css
+│   │   │   └── starter
+│   │   │       ├── config
+│   │   │       ├── config.sh
+│   │   │       ├── modules.json
+│   │   │       └── style.css
+│   │   ├── themeswitcher.sh
+│   │   └── toggle.sh
+│   ├── waypaper
+│   │   └── config.ini
+│   ├── wlogout
+│   │   ├── colors.css
+│   │   ├── icons
+│   │   │   ├── hibernate.png
+│   │   │   ├── lock.png
+│   │   │   ├── logout.png
+│   │   │   ├── reboot.png
+│   │   │   ├── shutdown.png
+│   │   │   └── suspend.png
+│   │   ├── layout
+│   │   ├── noise.png
+│   │   ├── README.txt
+│   │   └── style.css
+│   └── xsettingsd
+│       └── xsettingsd.conf
+├── .git
+│   ├── config
+│   ├── description
+│   ├── HEAD
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── push-to-checkout.sample
+│   │   ├── sendemail-validate.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       ├── heads
+│   │       │   └── main
+│   │       └── remotes
+│   │           └── origin
+│   │               └── HEAD
+│   ├── objects
+│   │   ├── info
+│   │   └── pack
+│   │       ├── pack-c106722c48b09bdc384338be714278349c756b4a.idx
+│   │       ├── pack-c106722c48b09bdc384338be714278349c756b4a.pack
+│   │       └── pack-c106722c48b09bdc384338be714278349c756b4a.rev
+│   ├── packed-refs
+│   └── refs
+│       ├── heads
+│       │   └── main
+│       ├── remotes
+│       │   └── origin
+│       │       └── HEAD
+│       └── tags
+├── .gtkrc-2.0
+├── install.sh
+├── README.md
+├── starship
+│   └── starship.toml
+├── tree.txt
+├── .Xresources
+└── zsh
+    └── .zshrc
+
+93 directories, 387 files
