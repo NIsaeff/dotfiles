@@ -17,6 +17,7 @@ dotfiles/
 ├── alacritty/        # Alacritty terminal config
 ├── kitty/            # Kitty terminal config
 ├── starship/         # Starship shell prompt
+├── tmux/             # Tmux terminal multiplexer config
 ├── zsh/              # Zsh configuration and plugins
 ├── install.sh        # Helper script to stow configs
 └── README.md
@@ -29,8 +30,8 @@ Core Packages
 # Shell and utilities
 sudo pacman -S zsh stow git
 
-# Terminals
-sudo pacman -S kitty alacritty
+# Terminals and multiplexer
+sudo pacman -S kitty alacritty tmux
 
 # Prompt and enhancements
 sudo pacman -S starship zoxide fzf
@@ -59,14 +60,15 @@ cp ~/.zshrc ~/.config/backup/ 2>/dev/null || true
 
     Install Configurations with Stow
 
-# Example: install all configs
+# Install all configs at once
 ./install.sh
 
-# Or selectively stow one package at a time
-stow -t ~/.config kitty
-stow -t ~/.config/alacritty alacritty
-stow -t ~/.config starship
-stow zsh
+# Or selectively stow individual packages:
+stow alacritty    # Stows to ~/.config/alacritty/
+stow kitty        # Stows to ~/.config/kitty/
+stow starship     # Stows to ~/.config/starship.toml
+stow tmux         # Stows to ~/.config/tmux/ or ~/
+stow zsh          # Stows to ~/.zshrc and related files
 
     Activate Zsh
 
