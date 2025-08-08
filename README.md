@@ -16,6 +16,7 @@ Repository Structure
 dotfiles/
 ├── alacritty/        # Alacritty terminal config
 ├── kitty/            # Kitty terminal config
+├── qutebrowser/      # Qutebrowser browser config
 ├── starship/         # Starship shell prompt
 ├── tmux/             # Tmux terminal multiplexer config
 ├── zsh/              # Zsh configuration and plugins
@@ -64,11 +65,19 @@ cp ~/.zshrc ~/.config/backup/ 2>/dev/null || true
 ./install.sh
 
 # Or selectively stow individual packages:
+
+# Standard stow (for packages with .config/ structure):
 stow alacritty    # Stows to ~/.config/alacritty/
 stow kitty        # Stows to ~/.config/kitty/
 stow starship     # Stows to ~/.config/starship.toml
 stow tmux         # Stows to ~/.config/tmux/ or ~/
 stow zsh          # Stows to ~/.zshrc and related files
+
+# Targeted stow (for flat package structure):
+stow -t ~/.config/qutebrowser qutebrowser
+
+# If you have existing config files that conflict:
+stow -t ~/.config/qutebrowser --adopt qutebrowser
 
     Activate Zsh
 
@@ -91,6 +100,20 @@ To update and restow:
 cd ~/dotfiles
 git pull origin main
 stow -R */      # Restow all packages
+
+# For targeted packages, restow individually:
+stow -R -t ~/.config/qutebrowser qutebrowser
+
+Stow Usage Notes
+
+This repository uses two stow approaches:
+
+1. **Standard stow**: For packages with nested `.config/` structure
+   - Example: `stow kitty` links `kitty/.config/kitty/` to `~/.config/kitty/`
+
+2. **Targeted stow**: For packages with flat structure using `-t` flag
+   - Example: `stow -t ~/.config/qutebrowser qutebrowser` links files directly
+   - Use `--adopt` flag if existing config files conflict
 
 Features
 
