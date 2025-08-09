@@ -1,0 +1,27 @@
+# Cache directories
+.cache/
+.npm/
+.npm-global/
+.nvm/
+
+# Runtime/temporary files
+.bash_history
+.wget-hsts
+.vscode-server/
+.claude/
+.claude.json
+.claude.json.backup
+
+# Local data directories
+.local/
+.n8n/
+
+# Embedded git repositories (nvim plugins, etc)
+.local/share/nvim/lazy/
+.config/nvim/
+
+# Project directories
+projects_dev/
+
+# Log files
+*.log
