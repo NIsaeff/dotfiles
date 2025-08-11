@@ -13,6 +13,13 @@ style = "Bold"
 family = "FiraCode Nerd Font"
 style = "Italic"
 
+[window]
+decorations = "none"
+
+# [colors.primary]
+# background = "#1e1e2e"
+# foreground = "#cdd6f4"
+
 [terminal.shell]
 program = "/bin/zsh"
 args = ["-l", "-c", "tmux attach || tmux new"]

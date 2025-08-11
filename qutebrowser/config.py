@@ -8,6 +8,9 @@ from qutebrowser.config.config import ConfigContainer
 config: ConfigAPI = config  # type: ignore
 c: ConfigContainer = c  # type: ignore
 
+# Load autoconfig (GUI settings)
+config.load_autoconfig()
+
 # General settings
 c.confirm_quit = ['downloads']
 c.auto_save.session = True
