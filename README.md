@@ -16,9 +16,11 @@ Repository Structure
 dotfiles/
 ├── alacritty/        # Alacritty terminal config
 ├── kitty/            # Kitty terminal config
+├── niri/             # Niri window manager config
 ├── qutebrowser/      # Qutebrowser browser config
 ├── starship/         # Starship shell prompt
 ├── tmux/             # Tmux terminal multiplexer config
+├── waybar/           # Waybar status bar (Catppuccin theme)
 ├── zsh/              # Zsh configuration and plugins
 ├── install.sh        # Helper script to stow configs
 └── README.md
@@ -37,12 +39,11 @@ sudo pacman -S kitty alacritty tmux
 # Prompt and enhancements
 sudo pacman -S starship zoxide fzf
 
-# Fonts
-sudo pacman -S ttf-fira-code ttf-font-awesome noto-fonts noto-fonts-emoji
+# Fonts (includes Nerd Fonts for icons)
+sudo pacman -S ttf-fira-code ttf-font-awesome noto-fonts noto-fonts-emoji ttf-firacode-nerd
 
-Optional: Niri (Wayland Tiling Compositor)
-
-sudo pacman -S niri
+# Wayland compositor and status bar
+sudo pacman -S niri waybar swaybg brightnessctl wireplumber
 
 Installation
 
@@ -91,7 +92,9 @@ Usage Notes
 
     Zsh: Configured for completion, history, and modern workflow
 
-    Niri: Optional tiling compositor for Wayland; GNOME is the default DE
+    Niri: Tiling compositor for Wayland with Waybar status bar
+    
+    Waybar: Catppuccin-themed status bar with workspace indicators, system monitoring, and wallpaper switcher
 
 Updating
 
