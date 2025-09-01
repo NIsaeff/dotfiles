@@ -67,8 +67,11 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 export GOBIN=$HOME/.local/gobin
+export GOPATH=$HOME/.cache/go
 
 # Optional: Enable syntax highlighting or autosuggestions here if used
 # Example:
  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+eval "$(fnm env --use-on-cd)"

@@ -19,9 +19,11 @@
         "custom/cpu",
         "custom/memory", 
         "custom/temperature",
+        "custom/media",
         "wireplumber",
         "backlight", 
         "network",
+        "bluetooth",
         "battery",
         "custom/wallpaper",
         "tray"
@@ -119,6 +121,21 @@
         "on-click": "niri msg action do-screen-transition"
     },
 
+    "custom/media": {
+        "format": "󰎆 {}",
+        "max-length": 40,
+        "interval": 1,
+        "exec": "playerctl metadata --format '{{ artist }} - {{ title }}' 2>/dev/null || echo 'No media'",
+        "exec-if": "playerctl status 2>/dev/null",
+        "tooltip": true,
+        "tooltip-format": "Left: Play/Pause | Right: Next | Scroll: Prev/Next",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-scroll-up": "playerctl previous", 
+        "on-scroll-down": "playerctl next",
+        "escape": true
+    },
+
     "custom/wallpaper": {
         "format": "󰸉",
         "tooltip": true,
@@ -127,6 +144,21 @@
         "on-click-right": "/home/n8dawg/.local/bin/wallpaper-manager menu",
         "on-scroll-up": "/home/n8dawg/.local/bin/wallpaper-manager next",
         "on-scroll-down": "/home/n8dawg/.local/bin/wallpaper-manager previous"
+    },
+
+    "bluetooth": {
+        "format": "󰂯 {status}",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-on": "󰂯",
+        "format-connected": "󰂱 {num_connections}",
+        "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "blueman-manager",
+        "on-click-right": "bluetoothctl power"
     },
 
     "tray": {

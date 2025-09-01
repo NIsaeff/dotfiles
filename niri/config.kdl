@@ -47,6 +47,7 @@ spawn-at-startup "alacritty"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "swaybg" "-i" "/home/n8dawg/.local/share/wallpapers/blue_wave_fractal.jpg" "-m" "fill"
 spawn-at-startup "waybar"
+spawn-at-startup "mako"
 
 hotkey-overlay {
     skip-at-startup
@@ -115,9 +116,10 @@ binds {
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     
-    // Screenshots
-    Print { spawn "grim" "-g" "$(slurp)" "~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"; }
-    Mod+Print { spawn "grim" "~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"; }
+    // Screenshots (all save file + copy to clipboard)
+    Mod+S { spawn "sh" "-c" "file=\"$HOME/Pictures/Screenshots/area-$(date +%Y%m%d_%H%M%S).png\" && grim -g \"$(slurp)\" \"$file\" && wl-copy < \"$file\" && notify-send 'Screenshot' 'Area saved & copied to clipboard'"; }
+    Mod+Ctrl+S { spawn "sh" "-c" "file=\"$HOME/Pictures/Screenshots/window-$(date +%Y%m%d_%H%M%S).png\" && grim -g \"$(slurp -w)\" \"$file\" && wl-copy < \"$file\" && notify-send 'Screenshot' 'Window saved & copied to clipboard'"; }
+    Mod+Alt+S { spawn "sh" "-c" "file=\"$HOME/Pictures/Screenshots/full-$(date +%Y%m%d_%H%M%S).png\" && grim \"$file\" && wl-copy < \"$file\" && notify-send 'Screenshot' 'Full screen saved & copied to clipboard'"; }
     
     // System controls
     Mod+Shift+E { quit; }
@@ -148,6 +150,9 @@ binds {
     Mod+Space { toggle-window-floating; }
     Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
     
+    // Mouse drag to float (for Brave and other windows)
+    // Note: Middle mouse button drag is handled by niri automatically
+    
     // Column + workspace navigation  
     Mod+U { move-column-to-workspace-down; }
     Mod+I { move-column-to-workspace-up; }
@@ -166,6 +171,36 @@ window-rule {
 window-rule {
     match app-id="brave-browser"
     open-floating true
+}
+
+window-rule {
+    match app-id="brave-personal"
+    open-floating true
+    focus-ring {
+        width 3
+        active-color "#22c55e"
+        inactive-color "#16a34a"
+    }
+    border {
+        width 2
+        active-color "#22c55e"
+        inactive-color "#16a34a"
+    }
+}
+
+window-rule {
+    match app-id="brave-work"
+    open-floating true
+    focus-ring {
+        width 3
+        active-color "#f59e0b"
+        inactive-color "#d97706"
+    }
+    border {
+        width 2
+        active-color "#f59e0b"
+        inactive-color "#d97706"
+    }
 }
 
 // Alacritty always transparent (focused or not)

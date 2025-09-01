@@ -130,9 +130,11 @@ window#waybar #workspaces button.urgent {
 #wireplumber,
 #backlight,
 #network,
+#bluetooth,
 #battery,
 #tray,
-#custom-wallpaper {
+#custom-wallpaper,
+#custom-media {
     background: alpha(@surface0, 0.8);
     color: @text;
     padding: 0 10px;
@@ -146,8 +148,10 @@ window#waybar #workspaces button.urgent {
 #wireplumber:hover,
 #backlight:hover,
 #network:hover,
+#bluetooth:hover,
 #battery:hover,
-#custom-wallpaper:hover {
+#custom-wallpaper:hover,
+#custom-media:hover {
     background: alpha(@surface1, 0.9);
     border-color: @mauve;
 }
@@ -229,6 +233,15 @@ window#waybar #workspaces button.urgent {
 /* Custom wallpaper module */
 #custom-wallpaper { color: @pink; }
 
+/* Media control module */
+#custom-media { 
+    color: @sky;
+    min-width: 200px;
+}
+#custom-media:hover {
+    color: @sapphire;
+}
+
 /* Power group */
 #group-power {
     background: alpha(@surface0, 0.8);
@@ -266,6 +279,12 @@ window#waybar #workspaces button.urgent {
 
 #network { color: @blue; }
 #network.disconnected { color: @red; }
+
+#bluetooth { color: @lavender; }
+#bluetooth.disabled { color: @overlay0; }
+#bluetooth.off { color: @overlay0; }
+#bluetooth.on { color: @lavender; }
+#bluetooth.connected { color: @green; }
 
 #battery { color: @green; }
 #battery.charging { color: @blue; }
