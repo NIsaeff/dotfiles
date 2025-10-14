@@ -1,269 +1,101 @@
-# dotfiles
-# 🚀 Arch Linux Hyprland Dotfiles
+# Arch Linux GNOME + Niri Dotfiles
 
-My personal dotfiles for a complete Arch Linux setup running Hyprland compositor. This repository contains configurations for a modern, efficient, and aesthetically pleasing desktop environment.
+This repository contains my personal dotfiles for a clean and efficient Arch Linux setup using:
 
-## 🖥️ Setup Overview
+    GNOME for a stable, fully featured Wayland desktop
 
-- **OS**: Arch Linux
-- **Window Manager**: Hyprland (Wayland)
-- **Status Bar**: Waybar
-- **Terminal**: Kitty
-- **Shell**: Zsh
-- **App Launcher**: Rofi
-- **Notifications**: Dunst
-- **File Manager**: Thunar
-- **Editor**: Neovim
+    Niri as an optional tiling Wayland compositor
 
-## 📁 Repository Structure
+    Kitty and Alacritty as GPU-accelerated terminals
 
-```
+    Zsh + Starship for a modern terminal experience
+
+These dotfiles are managed with GNU Stow for modular and reproducible configuration.
+Repository Structure
+
 dotfiles/
-├── hyprland/          # Hyprland window manager config
-├── waybar/            # Status bar configuration
-├── kitty/             # Terminal emulator config
-├── rofi/              # Application launcher
-├── dunst/             # Notification daemon
-├── zsh/               # Shell configuration
-├── nvim/              # Neovim editor config
-├── git/               # Git configuration
-├── gtk/               # GTK theme settings
-├── fontconfig/        # Font configuration
-└── scripts/           # Custom utility scripts
-```
+├── alacritty/        # Alacritty terminal config
+├── kitty/            # Kitty terminal config
+├── starship/         # Starship shell prompt
+├── zsh/              # Zsh configuration and plugins
+├── install.sh        # Helper script to stow configs
+└── README.md
 
-## 🔧 Prerequisites
+Prerequisites
 
-Before installing these dotfiles, ensure you have the following packages installed:
+Install the following packages before using these dotfiles:
+Core Packages
 
-### Essential Packages
-```bash
-# Core Hyprland and Wayland
-sudo pacman -S hyprland waybar kitty rofi dunst
+## Shell and utilities
+sudo pacman -S zsh stow git
 
-# System utilities
-sudo pacman -S stow git base-devel
+## Terminals
+sudo pacman -S kitty alacritty
 
-# Fonts
-sudo pacman -S ttf-font-awesome ttf-fira-code noto-fonts noto-fonts-emoji
+## Prompt and enhancements
+sudo pacman -S starship zoxide fzf
 
-# Audio
-sudo pacman -S pipewire pipewire-pulse pipewire-alsa
+## Fonts
+sudo pacman -S ttf-fira-code ttf-font-awesome noto-fonts noto-fonts-emoji
 
-# Additional utilities
-sudo pacman -S thunar grim slurp wl-clipboard brightnessctl pamixer
-```
+### Optional: Niri (Wayland Tiling Compositor)
 
-### AUR Packages (optional)
-```bash
-# AUR helper (yay)
-git clone https://aur.archlinux.org/yay.git
-cd yay && makepkg -si
+sudo pacman -S niri
 
-# Additional utilities
-yay -S hyprpaper-git wlogout
-```
+Installation
 
-## 🚀 Installation
+    Clone the Repository
 
-### 1. Clone the Repository
-```bash
 git clone https://github.com/NIsaeff/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-```
 
-### 2. Backup Existing Configs (Important!)
-```bash
-# Create backup directory
+    Backup Existing Configs (Optional)
+
 mkdir -p ~/.config/backup
-
-# Backup existing configurations
-cp -r ~/.config/hypr ~/.config/backup/ 2>/dev/null || true
-cp -r ~/.config/waybar ~/.config/backup/ 2>/dev/null || true
 cp -r ~/.config/kitty ~/.config/backup/ 2>/dev/null || true
-# Add other configs as needed
-```
+cp -r ~/.config/alacritty ~/.config/backup/ 2>/dev/null || true
+cp ~/.config/starship.toml ~/.config/backup/ 2>/dev/null || true
+cp ~/.zshrc ~/.config/backup/ 2>/dev/null || true
 
-### 3. Install Configurations
-```bash
-# Install all configurations
+    Install Configurations with Stow
+
+## Example: install all configs
 ./install.sh
 
-# Or install individual packages
-stow hyprland
-stow waybar
-stow kitty
-# etc.
-```
+## Or selectively stow one package at a time
+stow -t ~/.config kitty
+stow -t ~/.config/alacritty alacritty
+stow -t ~/.config starship
+stow zsh
 
-### 4. Set Default Shell (if using zsh)
-```bash
+    Activate Zsh
+
 chsh -s $(which zsh)
-```
 
-## 🎨 Customization
+Usage Notes
 
-### Colors and Themes
-The color scheme is defined in `hyprland/.config/hypr/colors.conf`. Modify these values to change the overall theme:
+    Kitty & Alacritty: GPU-accelerated, Wayland-friendly terminals
 
-```conf
-# Example color variables
-$primary = rgb(74, 144, 226)
-$background = rgb(30, 30, 46)
-$foreground = rgb(205, 214, 244)
-```
+    Starship: Provides a fast, informative shell prompt
 
-### Keybindings
-Main keybindings are defined in `hyprland/.config/hypr/keybinds.conf`:
+    Zsh: Configured for completion, history, and modern workflow
 
-- `Super + Return` - Open terminal
-- `Super + D` - Launch rofi
-- `Super + Q` - Close window
-- `Super + F` - Toggle fullscreen
-- `Super + [1-9]` - Switch workspaces
+    Niri: Optional tiling compositor for Wayland; GNOME is the default DE
 
-### Waybar Configuration
-Customize your status bar in `waybar/.config/waybar/config`. Modules can be added/removed and styled in `waybar/.config/waybar/style.css`.
+Updating
 
-## 🛠️ Troubleshooting
+To update and restow:
 
-### Common Issues
-
-**Hyprland won't start:**
-```bash
-# Check logs
-journalctl -u display-manager
-# Or if using startx
-cat ~/.local/share/xorg/Xorg.0.log
-```
-
-**Waybar not showing:**
-```bash
-# Kill and restart waybar
-pkill waybar
-waybar &
-```
-
-**Fonts not displaying correctly:**
-```bash
-# Rebuild font cache
-fc-cache -fv
-```
-
-**Audio not working:**
-```bash
-# Restart pipewire
-systemctl --user restart pipewire pipewire-pulse
-```
-
-## 📝 Scripts
-
-Custom scripts are located in `scripts/` directory:
-
-- `screenshot.sh` - Screenshot utility using grim and slurp
-- `volume.sh` - Volume control script
-- `brightness.sh` - Brightness control
-- `power-menu.sh` - Power options menu
-
-Make scripts executable:
-```bash
-chmod +x scripts/*.sh
-```
-
-## 🔄 Updating
-
-To update your dotfiles:
-
-```bash
 cd ~/dotfiles
 git pull origin main
+stow -R */      # Restow all packages
 
-# Re-stow any updated packages
-stow */
-```
+Features
 
-## 🎯 Features
+    Modular configuration managed with GNU Stow
 
-- **Tiling Window Management**: Efficient workspace organization
-- **Custom Keybindings**: Optimized for productivity
-- **Modern Aesthetics**: Clean, minimal design
-- **Performance Optimized**: Lightweight and fast
-- **Wayland Native**: Future-proof display protocol
-- **Modular Configuration**: Easy to customize individual components
+    Clean and minimal terminal environments with Kitty and Alacritty
 
-## 🤝 Contributing
+    Modern Zsh + Starship shell setup with zoxide support
 
-Feel free to fork this repository and submit pull requests for improvements. Issues and suggestions are welcome!
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Hyprland](https://hyprland.org/) - Amazing Wayland compositor
-- [Waybar](https://github.com/Alexays/Waybar) - Highly customizable status bar
-- [Arch Linux](https://archlinux.org/) - Best Linux distribution
-- The open-source community for amazing tools and inspiration
-
-## 📧 Contact
-
-If you have any questions or suggestions, feel free to open an issue or reach out!
-
----
-
-⭐ If you found this helpful, consider giving it a star!
-
-#!/bin/bash
-
-set -euo pipefail
-
-### CONFIG ###
-DISK="/dev/nvme0n1"             # Change if needed
-CRYPT_NAME="cryptroot"
-VG_NAME="vg0"
-LV_ROOT_SIZE="40G"
-HOSTNAME="archlinux"
-ROOT_PASSWORD="changeme"        # Optional automation
-
-### 0. Unmount if already mounted
-umount -R /mnt || true
-swapoff -a || true
-
-### 1. Partition Disk (EFI + LUKS)
-parted -s "$DISK" mklabel gpt
-parted -s "$DISK" mkpart ESP fat32 1MiB 513MiB
-parted -s "$DISK" set 1 esp on
-parted -s "$DISK" mkpart primary 513MiB 100%
-
-EFI_PART="${DISK}p1"
-LUKS_PART="${DISK}p2"
-
-### 2. Encrypt with LUKS
-cryptsetup luksFormat "$LUKS_PART"
-cryptsetup open "$LUKS_PART" "$CRYPT_NAME"
-
-### 3. LVM Setup
-pvcreate /dev/mapper/$CRYPT_NAME
-vgcreate $VG_NAME /dev/mapper/$CRYPT_NAME
-lvcreate -L $LV_ROOT_SIZE $VG_NAME -n root
-lvcreate -l 100%FREE $VG_NAME -n home
-
-### 4. Format Partitions
-mkfs.fat -F32 "$EFI_PART"
-mkfs.btrfs /dev/$VG_NAME/root
-mkfs.btrfs /dev/$VG_NAME/home
-
-### 5. Create Btrfs Subvolumes
-mount /dev/$VG_NAME/root /mnt
-btrfs subvolume create /mnt/@
-umount /mnt
-
-# Mount subvolumes
-mount -o subvol=@,compress=zstd /dev/$VG_NAME/root /mnt
-mkdir /mnt/home /mnt/boot
-mount /dev/$VG_NAME/home /mnt/home
-mount "$EFI_PART" /mnt/boot
-
-echo "✅ Disk layout prepared."
-echo "You can now run: pacstrap /mnt base linux linux-firmware btrfs-progs lvm2"
+    Compatible with GNOME for stability and Niri for tiling workflows
