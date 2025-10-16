@@ -137,8 +137,8 @@ binds {
     Mod+WheelScrollUp { focus-workspace-up; }
     
     // Horizontal scroll for column navigation (with modifier)
-    Mod+WheelScrollLeft { focus-column-right; }
-    Mod+WheelScrollRight { focus-column-left; }
+    Mod+Shift+WheelScrollDown { focus-column-right; }
+    Mod+Shift+WheelScrollUp { focus-column-left; }
     
     // Alternative: scroll without modifier (uncomment if preferred)
     // WheelScrollDown { focus-workspace-down; }
@@ -227,14 +227,26 @@ window-rule {
     match app-id="kitty"
     default-column-width { proportion 0.5; }
     opacity 0.92
+    geometry-corner-radius 12
+    clip-to-geometry true
+    draw-border-with-background false
     
-    // Disable focus effects for transparency
+    // Re-enable focus effects without background
     focus-ring {
-        off
+        width 3
+        active-color "#7c3aed"
+        inactive-color "#313244"
     }
     border {
-        off
+        width 2
+        active-color "#7c3aed"
+        inactive-color "#313244"
     }
+}
+
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
 }
 
 window-rule {
