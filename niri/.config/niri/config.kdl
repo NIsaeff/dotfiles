@@ -1,21 +1,16 @@
-// Niri configuration for EndeavourOS
-// AMD Ryzen 5 5600U with integrated Radeon graphics  
-// 2240x1400 display (eDP-1)
-// 
-// Note: Focus-ring/border disabled for transparent windows to avoid conflicts
+// Niri configuration for Arch Linux Desktop
+// AMD Ryzen 7 5800X 8-Core Processor
+// AMD Radeon RX 6800/6800 XT / 6900 XT
+// Dual monitor setup:
+//   - HP 27xw (DP-3): 1920x1080 @ 60Hz (top, centered)
+//   - LG QHD (DP-2): 2560x1440 @ 144Hz (bottom, primary)
 
 input {
     keyboard {
         xkb {
             layout "us"
         }
-    }
-    
-    touchpad {
-        tap
-        dwt
-        natural-scroll
-        accel-speed 0.2
+        numlock
     }
     
     mouse {
@@ -23,11 +18,18 @@ input {
     }
 }
 
-output "eDP-1" {
-    mode "2240x1400@60.000"
+output "DP-2" {
+    mode "2560x1440@144.000"
     scale 1.0
     transform "normal"
-    position x=0 y=0
+    position x=0 y=1080
+}
+
+output "DP-3" {
+    mode "1920x1080@60.000"
+    scale 1.0
+    transform "normal"
+    position x=320 y=0
 }
 
 layout {
@@ -43,11 +45,9 @@ layout {
 
 prefer-no-csd
 
-spawn-at-startup "alacritty"
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "swaybg" "-i" "/home/n8dawg/.local/share/wallpapers/blue_wave_fractal.jpg" "-m" "fill"
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
+spawn-at-startup "swaybg" "-i" "~/Pictures/wallpaper.jpg" "-m" "fill"
 
 hotkey-overlay {
     skip-at-startup
@@ -130,9 +130,7 @@ binds {
     XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     
-    // Brightness controls
-    XF86MonBrightnessUp { spawn "brightnessctl" "set" "10%+"; }
-    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
+
     
     // Mouse scroll workspace switching
     Mod+WheelScrollDown { focus-workspace-down; }
@@ -301,5 +299,4 @@ environment {
     DISPLAY ":0"
 }
 
-// Startup programs
-spawn-at-startup "sh" "-c" "/home/n8dawg/.local/bin/wallpaper-manager random"
+

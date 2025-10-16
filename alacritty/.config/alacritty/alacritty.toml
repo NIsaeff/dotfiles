@@ -22,5 +22,5 @@ decorations = "none"
 
 [terminal.shell]
 program = "/bin/zsh"
-args = ["-l", "-c", "tmux attach || tmux new"]
+# args = ["-l", "-c", "tmux attach || tmux new"]
 
