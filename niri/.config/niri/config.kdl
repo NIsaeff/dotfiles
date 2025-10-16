@@ -47,7 +47,7 @@ prefer-no-csd
 
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
-spawn-at-startup "swaybg" "-i" "~/Pictures/wallpaper.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-i" "/home/n8dawg/Pictures/abstract-swirls.jpg" "-m" "fill"
 
 hotkey-overlay {
     skip-at-startup
