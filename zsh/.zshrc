@@ -30,6 +30,8 @@ alias dupeterm='kitty --directory $(pwd) & disown'
 alias cd='z'
 alias fetch='neofetch | lolcat -a -s 900'
 
+export BROWSER='brave-browser'
+
 # Basic auto/tab complete:
 zstyle :compinstall filename '/home/n8dawg/.zshrc'
 zstyle ':completion:*' menu select
