@@ -20,7 +20,7 @@ decorations = "none"
 # background = "#1e1e2e"
 # foreground = "#cdd6f4"
 
-[terminal.shell]
-program = "/bin/zsh"
-args = ["-l", "-c", "tmux attach || tmux new"]
+# [terminal.shell]
+# program = "/bin/zsh"
+# args = ["-l", "-c", "tmux attach || tmux new"]
 

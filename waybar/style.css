@@ -130,10 +130,10 @@ window#waybar #workspaces button.urgent {
 #wireplumber,
 #backlight,
 #network,
-#bluetooth,
 #battery,
 #tray,
 #custom-wallpaper,
+#custom-suspend,
 #custom-media {
     background: alpha(@surface0, 0.8);
     color: @text;
@@ -148,9 +148,9 @@ window#waybar #workspaces button.urgent {
 #wireplumber:hover,
 #backlight:hover,
 #network:hover,
-#bluetooth:hover,
 #battery:hover,
 #custom-wallpaper:hover,
+#custom-suspend:hover,
 #custom-media:hover {
     background: alpha(@surface1, 0.9);
     border-color: @mauve;
@@ -232,6 +232,12 @@ window#waybar #workspaces button.urgent {
 
 /* Custom wallpaper module */
 #custom-wallpaper { color: @pink; }
+
+/* Custom suspend module */
+#custom-suspend { color: @lavender; }
+#custom-suspend:hover {
+    color: @mauve;
+}
 
 /* Media control module */
 #custom-media { 

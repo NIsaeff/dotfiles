@@ -25,6 +25,13 @@ input {
 
 output "eDP-1" {
     mode "2240x1400@60.000"
+    scale 1.2
+    transform "normal"
+    position x=0 y=1440
+}
+
+output "HDMI-A-1" {
+    mode "2560x1440@59.951"
     scale 1.0
     transform "normal"
     position x=0 y=0
@@ -130,9 +137,9 @@ binds {
     XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     
-    // Brightness controls
-    XF86MonBrightnessUp { spawn "brightnessctl" "set" "10%+"; }
-    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
+    // Brightness controls (disabled - was causing system crashes)
+    // XF86MonBrightnessUp { spawn "brightnessctl" "set" "10%+"; }
+    // XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
     
     // Mouse scroll workspace switching
     Mod+WheelScrollDown { focus-workspace-down; }

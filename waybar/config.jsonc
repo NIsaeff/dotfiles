@@ -10,7 +10,8 @@
     "modules-left": [
         "custom/endeavouros",
         "niri/workspaces",
-        "niri/window"
+        "niri/window",
+        "custom/media"
     ],
     "modules-center": [
         "clock"
@@ -19,12 +20,11 @@
         "custom/cpu",
         "custom/memory", 
         "custom/temperature",
-        "custom/media",
         "wireplumber",
-        "backlight", 
+        "backlight",
         "network",
-        "bluetooth",
         "battery",
+        "custom/suspend",
         "custom/wallpaper",
         "tray"
     ],
@@ -69,9 +69,16 @@
     },
 
     "backlight": {
-        "format": "󰃠 {percent}%",
-        "on-scroll-up": "brightnessctl set +5%",
-        "on-scroll-down": "brightnessctl set 5%-"
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "/home/n8dawg/.local/bin/dual-brightness-control up",
+        "on-scroll-down": "/home/n8dawg/.local/bin/dual-brightness-control down",
+        "on-click": "/home/n8dawg/.local/bin/dual-brightness-control detailed",
+        "tooltip": true,
+        "tooltip-format": "Scroll: Adjust both monitors | Click: Show detailed brightness",
+        "smooth-scrolling-threshold": 1
+        // TODO: Still experiencing scroll lag due to DDC/CI external monitor delay
+        // Consider switching to laptop-only brightness or custom module with timeout
     },
 
     "network": {
@@ -134,6 +141,17 @@
         "on-scroll-up": "playerctl previous", 
         "on-scroll-down": "playerctl next",
         "escape": true
+    },
+
+
+
+    "custom/suspend": {
+        "format": "󰤄",
+        "tooltip": true,
+        "tooltip-format": "Left: Suspend system | Right: Power off",
+        "on-click": "systemctl suspend",
+        "on-click-right": "systemctl poweroff",
+        "interval": "once"
     },
 
     "custom/wallpaper": {

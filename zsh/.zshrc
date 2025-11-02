@@ -29,6 +29,7 @@ alias pycharm='pycharm-professional'
 alias dupeterm='kitty --directory $(pwd) & disown'
 alias cd='z'
 alias fetch='neofetch | lolcat -a -s 900'
+alias reset-trackpad='sudo modprobe -r i2c_hid_acpi psmouse && sudo modprobe i2c_hid_acpi psmouse'
 
 # Basic auto/tab complete:
 zstyle :compinstall filename '/home/n8dawg/.zshrc'
@@ -69,9 +70,17 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 export GOBIN=$HOME/.local/gobin
 export GOPATH=$HOME/.cache/go
 
+# Default browser
+export BROWSER=brave
+
 # Optional: Enable syntax highlighting or autosuggestions here if used
 # Example:
  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(fnm env --use-on-cd)"
+alias logisim-fix1="GDK_BACKEND=x11 java -jar logisim-generic-2.7.1.jar"
+alias logisim-fix2="_JAVA_AWT_WM_NONREPARENTING=1 java -jar logisim-generic-2.7.1.jar"
+alias logisim-fix3="GDK_BACKEND=x11 _JAVA_AWT_WM_NONREPARENTING=1 java -jar logisim-generic-2.7.1.jar"
+alias logisim-fix4="java -Dsun.java2d.xrender=false -jar logisim-generic-2.7.1.jar"
+alias logisim-fix5="GDK_BACKEND=x11 _JAVA_AWT_WM_NONREPARENTING=1 java -Dsun.java2d.xrender=false -Dawt.useSystemAAFontSettings=on -jar logisim-generic-2.7.1.jar"
