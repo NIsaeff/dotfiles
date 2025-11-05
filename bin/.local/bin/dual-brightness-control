@@ -1,0 +1,205 @@
+#!/bin/bash
+
+# Dual Monitor Brightness Control for EndeavourOS
+# Controls both laptop (brightnessctl) and external LG monitor (ddcutil)
+#
+# KNOWN ISSUE: DDC/CI communication with external monitor causes ~250ms delay
+# TODO: Still experiencing UI lag despite async optimization attempts
+# - Consider laptop-only mode for immediate response
+# - Investigate ddcutil --sleep-multiplier optimization
+# - Possible caching mechanism for external monitor state
+
+set -euo pipefail
+
+# Configuration
+LAPTOP_DEVICE="amdgpu_bl1"
+EXTERNAL_DISPLAY="1"  # ddcutil display number
+STEP_SIZE=5
+
+# Helper functions
+get_laptop_brightness() {
+    brightnessctl -d "$LAPTOP_DEVICE" get
+}
+
+get_laptop_max() {
+    brightnessctl -d "$LAPTOP_DEVICE" max
+}
+
+get_laptop_percent() {
+    local current=$(get_laptop_brightness)
+    local max=$(get_laptop_max)
+    echo $((current * 100 / max))
+}
+
+get_external_brightness() {
+    ddcutil --display "$EXTERNAL_DISPLAY" getvcp 10 --brief 2>/dev/null | cut -d' ' -f4 || echo "0"
+}
+
+set_laptop_brightness() {
+    local percent=$1
+    brightnessctl -d "$LAPTOP_DEVICE" set "${percent}%" >/dev/null 2>&1
+}
+
+set_external_brightness() {
+    local percent=$1
+    # Run external monitor control in background to prevent UI blocking
+    (ddcutil --display "$EXTERNAL_DISPLAY" setvcp 10 "$percent" 2>/dev/null || true) &
+}
+
+get_average_brightness() {
+    local laptop_percent=$(get_laptop_percent)
+    local external_percent=$(get_external_brightness)
+    echo $(((laptop_percent + external_percent) / 2))
+}
+
+adjust_brightness() {
+    local adjustment=$1
+    local laptop_current=$(get_laptop_percent)
+    local external_current=$(get_external_brightness)
+    
+    # Calculate new values
+    local laptop_new=$((laptop_current + adjustment))
+    local external_new=$((external_current + adjustment))
+    
+    # Clamp values between 1 and 100
+    laptop_new=$((laptop_new < 1 ? 1 : laptop_new))
+    laptop_new=$((laptop_new > 100 ? 100 : laptop_new))
+    external_new=$((external_new < 1 ? 1 : external_new))
+    external_new=$((external_new > 100 ? 100 : external_new))
+    
+    # Apply laptop brightness immediately (fast)
+    set_laptop_brightness "$laptop_new"
+    
+    # Apply external brightness asynchronously (prevents blocking)
+    set_external_brightness "$external_new"
+}
+
+set_both_brightness() {
+    local percent=$1
+    # Clamp between 1 and 100
+    percent=$((percent < 1 ? 1 : percent))
+    percent=$((percent > 100 ? 100 : percent))
+    
+    # Apply laptop brightness immediately
+    set_laptop_brightness "$percent"
+    
+    # Apply external brightness asynchronously
+    set_external_brightness "$percent"
+}
+
+show_status() {
+    local laptop_percent=$(get_laptop_percent)
+    # Use laptop brightness for immediate feedback, external check can be slow
+    echo "󰃠 ${laptop_percent}%"
+}
+
+show_detailed_status() {
+    local laptop_percent=$(get_laptop_percent)
+    local external_percent=$(get_external_brightness)
+    local average=$(get_average_brightness)
+    
+    echo "Laptop: ${laptop_percent}% | External: ${external_percent}% | Average: ${average}%"
+}
+
+case "${1:-status}" in
+    "up"|"+")
+        adjust_brightness "+$STEP_SIZE"
+        show_status
+        ;;
+    "down"|"-")
+        adjust_brightness "-$STEP_SIZE"
+        show_status
+        ;;
+    "up-laptop-first")
+        # Laptop-first mode: instant response, external syncs later
+        laptop_current=$(get_laptop_percent)
+        laptop_new=$((laptop_current + STEP_SIZE))
+        laptop_new=$((laptop_new > 100 ? 100 : laptop_new))
+        set_laptop_brightness "$laptop_new"
+        # Queue external update completely detached
+        nohup bash -c "ddcutil --display $EXTERNAL_DISPLAY setvcp 10 $laptop_new 2>/dev/null || true" >/dev/null 2>&1 &
+        echo "󰃠 ${laptop_new}%"
+        ;;
+    "down-laptop-first")
+        # Laptop-first mode: instant response, external syncs later
+        laptop_current=$(get_laptop_percent)
+        laptop_new=$((laptop_current - STEP_SIZE))
+        laptop_new=$((laptop_new < 1 ? 1 : laptop_new))
+        set_laptop_brightness "$laptop_new"
+        # Queue external update completely detached
+        nohup bash -c "ddcutil --display $EXTERNAL_DISPLAY setvcp 10 $laptop_new 2>/dev/null || true" >/dev/null 2>&1 &
+        echo "󰃠 ${laptop_new}%"
+        ;;
+    "set")
+        if [[ $# -lt 2 ]]; then
+            echo "Usage: $0 set <percentage>"
+            exit 1
+        fi
+        set_both_brightness "$2"
+        show_status
+        ;;
+    "laptop")
+        if [[ $# -lt 3 ]]; then
+            echo "Usage: $0 laptop <up|down|set> [value]"
+            exit 1
+        fi
+        case "$2" in
+            "up") 
+                brightnessctl -d "$LAPTOP_DEVICE" set "+${STEP_SIZE}%" >/dev/null
+                ;;
+            "down") 
+                brightnessctl -d "$LAPTOP_DEVICE" set "${STEP_SIZE}%-" >/dev/null
+                ;;
+            "set") 
+                set_laptop_brightness "$3"
+                ;;
+        esac
+        show_status
+        ;;
+    "external")
+        if [[ $# -lt 3 ]]; then
+            echo "Usage: $0 external <up|down|set> [value]"
+            exit 1
+        fi
+        case "$2" in
+            "up") 
+                local current=$(get_external_brightness)
+                set_external_brightness $((current + STEP_SIZE))
+                ;;
+            "down") 
+                local current=$(get_external_brightness)
+                set_external_brightness $((current - STEP_SIZE))
+                ;;
+            "set") 
+                set_external_brightness "$3"
+                ;;
+        esac
+        show_status
+        ;;
+    "status")
+        show_status
+        ;;
+    "detailed")
+        show_detailed_status
+        ;;
+    "help"|"-h"|"--help")
+        echo "Dual Monitor Brightness Control"
+        echo ""
+        echo "Usage:"
+        echo "  $0 [up|+]              Increase both monitors by $STEP_SIZE%"
+        echo "  $0 [down|-]            Decrease both monitors by $STEP_SIZE%"
+        echo "  $0 up-laptop-first     Increase laptop immediately, sync external later (FAST)"
+        echo "  $0 down-laptop-first   Decrease laptop immediately, sync external later (FAST)"
+        echo "  $0 set <percent>       Set both monitors to specific percentage"
+        echo "  $0 laptop <up|down|set> [value]   Control only laptop screen"
+        echo "  $0 external <up|down|set> [value] Control only external monitor"
+        echo "  $0 status              Show current average brightness"
+        echo "  $0 detailed            Show detailed brightness for both monitors"
+        echo "  $0 help                Show this help"
+        ;;
+    *)
+        echo "Unknown command: $1"
+        echo "Use '$0 help' for usage information"
+        exit 1
+        ;;
+esac
