@@ -50,7 +50,6 @@ layout {
 
 prefer-no-csd
 
-spawn-at-startup "alacritty"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "swaybg" "-i" "/home/n8dawg/.local/share/wallpapers/blue_wave_fractal.jpg" "-m" "fill"
 spawn-at-startup "waybar"
