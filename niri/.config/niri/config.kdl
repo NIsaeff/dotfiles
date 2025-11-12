@@ -73,8 +73,8 @@ binds {
     Mod+Q { close-window; }
     Mod+H { focus-column-left; }
     Mod+L { focus-column-right; }
-    Mod+J { focus-window-or-workspace-down; }
-    Mod+K { focus-window-or-workspace-up; }
+    Mod+J { focus-window-or-monitor-down; }
+    Mod+K { focus-window-or-monitor-up; }
     
     Mod+Shift+H { move-column-left; }
     Mod+Shift+L { move-column-right; }
