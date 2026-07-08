@@ -1,6 +1,5 @@
 # Set safe default PATH early to ensure coreutils and shell commands work
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin:$PATH"
-
 # Add user-specific paths
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/lib/ccache/bin:$PATH"
@@ -84,3 +83,5 @@ alias logisim-fix2="_JAVA_AWT_WM_NONREPARENTING=1 java -jar logisim-generic-2.7.
 alias logisim-fix3="GDK_BACKEND=x11 _JAVA_AWT_WM_NONREPARENTING=1 java -jar logisim-generic-2.7.1.jar"
 alias logisim-fix4="java -Dsun.java2d.xrender=false -jar logisim-generic-2.7.1.jar"
 alias logisim-fix5="GDK_BACKEND=x11 _JAVA_AWT_WM_NONREPARENTING=1 java -Dsun.java2d.xrender=false -Dawt.useSystemAAFontSettings=on -jar logisim-generic-2.7.1.jar"
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+export GEMINI_API_KEY="AIzaSyAqUqww4q2FwICnPL3kw2dpjrCpcFOqyXA"
